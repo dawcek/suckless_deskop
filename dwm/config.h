@@ -28,7 +28,7 @@ static const Rule rules[] = {
 	 */
 	/* class      instance    title       tags mask     isfloating   monitor */
 	{ "Gimp",     NULL,       NULL,       0,            1,           -1 },
-	{ "Firefox",  NULL,       NULL,       1 << 1,       0,           -1 },
+	/* { "Firefox",  NULL,       NULL,       1 << 8,       0,           -1 }, */
 };
 
 /* layout(s) */
@@ -60,13 +60,14 @@ static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont,
 static const char *termcmd[]  = { "st", NULL };
 static const char scratchpadname[] = "scratchpad";
 static const char *scratchpadcmd[] = { "st", "-t", scratchpadname, "-g", "120x34", NULL };
-static const char *ffcmd[]  = { "firefox", NULL };
+static const char *ffcmd[]  = { "firefox-bin", NULL };
 static const char *rangercmd[]  = { "st","-e","ranger", NULL };
 static const char *vimcmd[]  = { "st","-e","vim", NULL };
 static const char *htopcmd[]  = { "st","-e","htop", NULL };
 static const char *tmuxcmd[]  = { "st","-e","tmux", NULL };
-static const char *lockcmd[]  = { "slock", NULL };
-
+static const char *lockcmd[] = { "slock", NULL };
+static const char *offcmd[] = { "sudo","poweroff", NULL };
+static const char *rebootcmd[] = { "sudo","reboot", NULL };
 static Key keys[] = {
 	/* modifier                     key        function        argument */
 	{ MODKEY,                       XK_p,      spawn,          {.v = dmenucmd } },
@@ -102,13 +103,16 @@ static Key keys[] = {
 	TAGKEYS(                        XK_7,                      6)
 	TAGKEYS(                        XK_8,                      7)
 	TAGKEYS(                        XK_9,                      8)
-	{MODKEY|ShiftMask,              XK_q,      quit,           {0} },
+	{ MODKEY|ShiftMask,             XK_q,      quit,           {0} },
 	{MODKEY|ShiftMask,              XK_b,      spawn,          {.v = ffcmd}},
 	{MODKEY|ShiftMask,              XK_z,      spawn,          {.v = rangercmd}},
 	{MODKEY|ShiftMask,              XK_t,      spawn,          {.v = vimcmd}},
 	{MODKEY|ShiftMask,              XK_h,      spawn,          {.v = htopcmd}},
 	{MODKEY|ControlMask,            XK_Return, spawn,          {.v = tmuxcmd}},
-	{MODKEY|ShiftMask,              XK_l,      spawn,          {.v = lockcmd}},
+	{MODKEY|ShiftMask, 		XK_l, 	   spawn, 	   {.v = lockcmd}},
+	{0		, 		XK_Print,  spawn, 	   SHCMD("exec scrot -e 'mv $f ~/img/screenshots/'")},
+	{MODKEY|ShiftMask,            	XK_s, spawn,          {.v = offcmd}},
+	{MODKEY|ShiftMask,            	XK_r, spawn,          {.v = rebootcmd}},
 };
 
 /* button definitions */
