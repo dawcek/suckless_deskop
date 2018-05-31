@@ -1,4 +1,5 @@
 [[ -f ~/.Xresources ]] && xrdb -merge -I$HOME ~/.Xresources
+compton &
 setxkbmap pl
 feh --bg-scale /home/userx/.config/wall.jpg
 while true; do
