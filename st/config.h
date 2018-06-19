@@ -84,37 +84,46 @@ unsigned int tabspaces = 8;
 
 /* bg opacity */
 unsigned int alpha = 0xd9;
-
 /* Terminal colors (16 first used in escape sequence) */
 static const char *colorname[] = {
-	/* solarized dark */
-	"#073642",  /*  0: black    */
-	"#dc322f",  /*  1: red      */
-	"#859900",  /*  2: green    */
-	"#b58900",  /*  3: yellow   */
-	"#268bd2",  /*  4: blue     */
-	"#d33682",  /*  5: magenta  */
-	"#2aa198",  /*  6: cyan     */
-	"#eee8d5",  /*  7: white    */
-	"#002b36",  /*  8: brblack  */
-	"#cb4b16",  /*  9: brred    */
-	"#586e75",  /* 10: brgreen  */
-	"#657b83",  /* 11: bryellow */
-	"#f5f5f5",  /* 12: brblue   */
-	"#6c71c4",  /* 13: brmagenta*/
-	"#93a1a1",  /* 14: brcyan   */
-	"#fdf6e3",  /* 15: brwhite  */
+	/* 8 normal colors */
+	[0] = "#2b2b2b", /* black   */
+	[1] = "#da4939", /* red     */
+	[2] = "#a5c261", /* green   */
+	[3] = "#ffc66d", /* yellow  */
+	[4] = "#6d9cbe", /* blue    */
+	[5] = "#b6b3eb", /* magenta */
+	[6] = "#519f50", /* cyan    */
+	[7] = "#e6e1dc", /* white   */
+	/* 8 bright colors */
+	[8]  = "#5a647e", /* black   */
+	[9]  = "#da4939", /* red     */
+	[10] = "#a5c261", /* green   */
+	[11] = "#ffc66d", /* yellow  */
+	[12] = "#6d9cbe", /* blue    */
+	[13] = "#b6b3eb", /* magenta */
+	[14] = "#519f50", /* cyan    */
+	[15] = "#f9f7f3", /* white   */
+	/* special colors */
+	[256] = "#2b2b2b", /* background */
+	[257] = "#e6e1dc", /* foreground */
 };
 
-
 /*
- * Default colors (colorname index)
- * foreground, background, cursor, reverse cursor
- */
-unsigned int defaultfg = 12;
-unsigned int defaultbg = 8;
-static unsigned int defaultcs = 14;
-static unsigned int defaultrcs = 15;
+ *  * Default colors (colorname index)
+ *   * foreground, background, cursor
+ *    */
+unsigned int defaultfg = 257;
+unsigned int defaultbg = 256;
+static unsigned int defaultcs = 257;
+static unsigned int defaultrcs = 257;
+/*
+ *  * Colors used, when the specific fg == defaultfg. So in reverse mode this
+ *   * will reverse too. Another logic would only make the simple feature too
+ *    * complex.
+ *     */
+static unsigned int defaultitalic = 7;
+static unsigned int defaultunderline = 7;
 
 /*
  * Default shape of cursor
