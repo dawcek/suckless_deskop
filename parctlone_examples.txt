@@ -1,0 +1,11 @@
+partclone.ext4 -c -s /dev/fingolfin_vg/home_snap_lv -o /mnt/data/backup.pcl
+#
+partclone.ext4 -N -c -s  /dev/fingolfin_vg/home_snap_lv -o /mnt/data/backup.pcl
+#
+partclone.ext4 -c -s /dev/fingolfin_vg/home_snap_lv | gzip -c -9 > /mnt/data/backup.pcl
+#
+partclone.ext4 -r -s /mnt/data/backup.pcl -o /dev/fingolfin_vg/home_snap_lv
+#
+gzip -c -d /mnt/data/backup.pcl.gz | partclone.ext4 -r -o /dev/fingolfin_vg/home_snap_lv
+#
+zcat /mnt/data/backup.pcl.gz | partclone.ext4 -r -o /dev/fingolfin_vg/home_snap_lv
